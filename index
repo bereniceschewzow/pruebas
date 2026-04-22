@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Shinwa - Mitología Japonesa</title>
+    <link rel="stylesheet" href="css/estilo.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    <h1>shinwa</h1>
+
+    <nav>
+        <ul>
+            <li><a href="dioses.html">Dioses principales</a></li>
+            <li><a href="criaturas.html">Criaturas míticas</a></li>
+            <li><a href="mitos.html">Mitos y relatos</a></li>
+            <li><a href="mapa.html">Mapa mitológico</a></li>
+            <li><a href="quiz.html">Quiz mitológico</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+<section class="mismo-fondo">
+    <h2>Explorá el mundo de la mitología japonesa</h2>
+    <p>Dioses, espíritus y criaturas que habitan entre la naturaleza y lo invisible.</p>
+
+    <h3>Introducción a la mitología japonesa</h3>
+    <p>
+        La mitología japonesa reúne relatos y creencias que explican el origen del mundo, 
+        la naturaleza y la vida humana.
+    </p>
+</section>
+<img src="img/pagprincipal.png"alt="Imagen principal" width="500">
+
+    <h2><a href="dioses.html"> Dioses principales</a></h2> 
+    <ul>
+        <li><h5>Amaterasu</h5><img src="img/1dios1-8.png" alt="amaterasu" width="300"></li> 
+        <li><h5>Tsukuyomi</h5><img src="img/2dios2-8.png" alt="tsukuyomi" width="300"></li>
+        <li><h5>Susanoo</h5> <img src="img/3dios3-8.png" alt="Susanoo" width="300"></li>
+        <li><h5>Izanami</h5> <img src="img/4dios4-8.png" alt="Izanami" width="300"></li>
+    </ul>
+</section>
+
+    <h2><a href="criaturas.html"> Criaturas Míticas</a></h2>
+
+    <ul>
+        <li><h5>Kitsune</h5> <img src="img/1criatura1-8.png" alt="Kitsune" width="300"></li>
+        <li><h5>Tengu</h5> <img src="img/2criatura2-8.png" alt="Tengu" width="300"></li>
+        <li><h5>Ryū</h5> <img src="img/3criatura3-8.png" alt="Ryu" width="300"></li> 
+        <li><h5>Kappa</h5> <img src="img/4criatura4-8.png" alt="Kappa" width="300"></li>
+    </ul>
+
+   
+</section>
+
+    <h2><a href="mitos.html"> Mitos y relatos</a></h2>
+
+    <section class="mismo-fondo">
+        <h3>Izanagi e Izanami</h3>
+    
+         <img src="img/1mitosrelatos1-8.png" alt="izanagi e izanami" width="300">
+    </section>
+
+    <section class="mismo-fondo">
+        <h3>Susanoo y la serpiente</h3>
+        
+         <img src="img/2mitosrelatos2-8.png" alt="Susanoo" width="300">
+    </section>
+</section>
+
+    <h2><a href="mapa.html"> Mapa Mitológico</a></h2>
+<img src="img/1mapa-8.png" alt="mapa" width="400">
+    <section>
+        <h3>Kono Sekai</h3>
+       
+        <p>Mundo de los humanos.</p>
+    </section>
+
+    <section>
+        <h3>Takamagahara</h3>
+        
+        <p>Reino celestial de los dioses.</p>
+    </section>
+
+    <section>
+        <h3>Yomi</h3>
+        
+        <p>Reino de los muertos.</p>
+    </section>
+
+
+<section id="quiz">
+   
+    <h4><a href="quiz.html">Quiz mitológico</a></h4>
+
+</section>
+
+</main>
+
+<footer>
+    <ul>
+    <li>Aviso Legal  </li>
+    <li>Política de cookies </li> 
+    <li>Términos y condiciones</li>
+    </ul>
+</footer>
+
+</body>
+</html>
