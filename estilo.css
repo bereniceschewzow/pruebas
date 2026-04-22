@@ -14,7 +14,7 @@ p {
 
 }
 
-/* TABLET */
+/* celu */
 
 @media (min-width: 700px) {
 
@@ -48,4 +48,5 @@ p {
 
   }
 
-}
+} /* cierre DESKTOP */
+
