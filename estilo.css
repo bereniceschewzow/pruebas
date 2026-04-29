@@ -4,20 +4,18 @@ body {
   margin: 0;
 }
 
-/* header */
+/* HEADER */
 
 header {
   text-align: center;
   padding: 20px;
 }
 
-/* título */
-
 h1 {
   margin-bottom: 10px;
 }
 
-/* menú */
+/* NAV */
 
 nav ul {
   display: flex;
@@ -36,7 +34,7 @@ nav a {
   border-radius: 5px;
 }
 
-/* contenedor principal */
+/* MAIN */
 
 main {
   display: flex;
@@ -48,7 +46,7 @@ main {
   padding: 20px;
 }
 
-/* tarjetas */
+/* SECTIONS */
 
 section {
   background-color: beige;
@@ -56,13 +54,23 @@ section {
   border-radius: 10px;
 }
 
-/* títulos de secciones */
+/* GRID */
 
-section h2 {
-  margin-top: 0;
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0;
 }
 
-/* imágenes */
+.grid li {
+  list-style: none;
+  background-color: #d9d6c8;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* IMG */
 
 img {
   max-width: 100%;
@@ -70,34 +78,33 @@ img {
   margin-top: 10px;
 }
 
-/* footer */
+/* FOOTER */
 
 footer {
   text-align: center;
   padding: 20px;
 }
 
-/* -------- TABLET */
+/* TABLET */
 
 @media (min-width: 700px) {
 
-  main {
+  .grid {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
   }
 
-  section {
-    width: 48%;
+  .grid li {
+    width: 45%;
   }
 
 }
 
-/* -------- DESKTOP */
+/* DESKTOP */
 
 @media (min-width: 1200px) {
 
-  section {
+  .grid li {
     width: 30%;
   }
 
