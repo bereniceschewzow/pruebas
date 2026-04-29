@@ -8,10 +8,16 @@ body {
 
 header {
   text-align: center;
-  padding: 15px;
+  padding: 20px;
 }
 
-/* menu */
+/* título */
+
+h1 {
+  margin-bottom: 10px;
+}
+
+/* menú */
 
 nav ul {
   display: flex;
@@ -19,14 +25,18 @@ nav ul {
   gap: 15px;
   list-style: none;
   padding: 0;
+  flex-wrap: wrap;
 }
 
 nav a {
   text-decoration: none;
   color: black;
+  background-color: beige;
+  padding: 8px 12px;
+  border-radius: 5px;
 }
 
-/* contenedor */
+/* contenedor principal */
 
 main {
   display: flex;
@@ -42,34 +52,48 @@ main {
 
 section {
   background-color: beige;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
+}
+
+/* títulos de secciones */
+
+section h2 {
+  margin-top: 0;
 }
 
 /* imágenes */
 
 img {
   max-width: 100%;
-  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
-/* tablet */
+/* footer */
+
+footer {
+  text-align: center;
+  padding: 20px;
+}
+
+/* -------- TABLET */
 
 @media (min-width: 700px) {
 
   main {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   section {
-    width: 45%;
+    width: 48%;
   }
 
 }
 
-/* desktop */
+/* -------- DESKTOP */
 
 @media (min-width: 1200px) {
 
