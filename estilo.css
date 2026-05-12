@@ -548,9 +548,3 @@ textarea:focus {
     border-color: var(--red);
   }
 }
-@media (min-width: 640px) {
-  .hero > img             { height: 55vw; }
-   
-@media (min-width: 1024px) {
-  .hero                   { min-height: 600px; }
-  .hero > img             { width: 55%; height: 600px; max-height: none; float: left; }
