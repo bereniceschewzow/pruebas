@@ -1,71 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Qué harías más simple?</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Qué harías más simple?</title>
+  <link rel="stylesheet" href="saul-bass.css">
 </head>
 <body>
 
-<h1>¿Qué harías más simple?</h1>
+<div class="page-wrapper">
 
-<form>
+  <!-- ── Hero ── -->
+  <header class="hero">
+    <h1>¿Qué harías<br>más simple?</h1>
+    <p class="hero-sub">Diseño de vida sin complicaciones</p>
+  </header>
 
-  <div>
-    <label for="simplicidad">¿Qué tan simple vivís? (1 = caos total, 10 = zen absoluto)</label>
-    <input type="range" id="simplicidad" min="1" max="10" value="5" step="1"
-      oninput="document.getElementById('simp-out').textContent = this.value">
-    <span id="simp-out">5</span>
-  </div>
+  <div class="strip"></div>
 
-  <div>
-    <label>¿De qué área es?</label>
-    <div id="areas">
-      <button type="button" data-val="Trabajo / productividad"> Trabajo</button>
-      <button type="button" data-val="Tecnología"> Tecnología</button>
-      <button type="button" data-val="Hogar"> Hogar</button>
-      <button type="button" data-val="Educación"> Educación</button>
-      <button type="button" data-val="Salud / bienestar"> Salud</button>
-      <button type="button" data-val="Finanzas personales"> Finanzas</button>
-      <button type="button" data-val="Relaciones / social"> Social</button>
-      <button type="button" data-val="Otro"> Otro</button>
+  <!-- ── Form ── -->
+  <form>
+
+    <div data-num="01">
+      <label for="simplicidad">¿Qué tan simple vivís? — 1 = caos total · 10 = zen absoluto</label>
+      <div class="range-row">
+        <input type="range" id="simplicidad" min="1" max="10" value="5" step="1"
+          oninput="document.getElementById('simp-out').textContent = this.value">
+        <span class="range-value" id="simp-out">5</span>
+      </div>
     </div>
+
+    <div data-num="02">
+      <label>¿De qué área es?</label>
+      <div id="areas">
+        <button type="button" data-val="Trabajo / productividad">Trabajo</button>
+        <button type="button" data-val="Tecnología">Tecnología</button>
+        <button type="button" data-val="Hogar">Hogar</button>
+        <button type="button" data-val="Educación">Educación</button>
+        <button type="button" data-val="Salud / bienestar">Salud</button>
+        <button type="button" data-val="Finanzas personales">Finanzas</button>
+        <button type="button" data-val="Relaciones / social">Social</button>
+        <button type="button" data-val="Otro">Otro</button>
+      </div>
+    </div>
+
+    <div data-num="03">
+      <label for="cosa">¿Qué simplificarías?</label>
+      <textarea id="cosa" placeholder="Ej: armar el menú semanal, gestionar mis contraseñas..."></textarea>
+    </div>
+
+    <div data-num="04">
+      <label for="motivo">¿Por qué te parece complicado hoy?</label>
+      <textarea id="motivo" placeholder="Contame qué lo hace difícil o tedioso..."></textarea>
+    </div>
+
+    <div data-num="05">
+      <label for="urgencia">¿Qué tan urgente es resolverlo? — 1 = puede esperar · 5 = ya mismo</label>
+      <div class="range-row">
+        <input type="range" id="urgencia" min="1" max="5" value="3" step="1"
+          oninput="document.getElementById('urg-out').textContent = this.value">
+        <span class="range-value" id="urg-out">3</span>
+      </div>
+    </div>
+
+    <div>
+      <button type="button" id="btn" onclick="enviar()">Enviar</button>
+    </div>
+
+    <div id="error-msg" hidden>
+      <p id="error-text"></p>
+    </div>
+
+  </form>
+
+  <!-- ── Result ── -->
+  <div id="result-box" hidden>
+    <h2>Respuesta de Claude</h2>
+    <div id="result-content"></div>
   </div>
 
-  <div>
-    <label for="cosa">¿Qué simplificarías?</label>
-    <textarea id="cosa" placeholder="Ej: armar el menú semanal, gestionar mis contraseñas..."></textarea>
+  <!-- ── Year strip footer ── -->
+  <div class="year-strip" aria-hidden="true">
+    <span>1920</span><span>1936</span><span>1946</span><span>1955</span>
+    <span>1958</span><span>1962</span><span>1963</span><span>1980</span>
+    <span>1984</span><span>1987</span><span>1991</span><span>1996</span>
   </div>
 
-  <div>
-    <label for="motivo">¿Por qué te parece complicado hoy?</label>
-    <textarea id="motivo" placeholder="Contame qué lo hace difícil o tedioso..."></textarea>
-  </div>
-
-  <div>
-    <label for="urgencia">¿Qué tan urgente es resolverlo? (1 = puede esperar, 5 = ya mismo)</label>
-    <input type="range" id="urgencia" min="1" max="5" value="3" step="1"
-      oninput="document.getElementById('urg-out').textContent = this.value">
-    <span id="urg-out">3</span>
-  </div>
-
-  <button type="button" id="btn" onclick="enviar()">Enviar</button>
-
-</form>
-
-<div id="error-msg" hidden>
-  <p id="error-text"></p>
-</div>
-
-<div id="result-box" hidden>
-  <h2>Respuesta de Claude</h2>
-  <div id="result-content"></div>
-</div>
+</div><!-- /.page-wrapper -->
 
 <script>
   let areaSelected = '';
@@ -162,6 +183,7 @@ Respondé en español, sé directo y evitá frases genéricas.`;
     }
 
     document.getElementById('result-box').hidden = false;
+    document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 </script>
 
