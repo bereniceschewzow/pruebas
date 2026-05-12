@@ -445,7 +445,7 @@ textarea:focus {
   .hero::before { width: 140px; height: 220px; opacity: 0.6; }
   .hero::after  { width: 80px;  height: 130px; right: 36px; }
 
-  .logo { width: 220px; }
+  .logo { width: 340px; }
 
   form {
     border-left: none;
@@ -473,7 +473,7 @@ textarea:focus {
   .hero::before { width: 90px;  height: 160px; opacity: 0.45; }
   .hero::after  { width: 55px;  height: 90px;  right: 20px; bottom: -6px; }
 
-  .logo { width: 160px; }
+  .logo { width: 260px; }
 
   .hero-sub {
     font-size: 0.62rem;
@@ -545,7 +545,7 @@ textarea:focus {
 /* ── Mobile chico (≤ 360px) ── */
 @media (max-width: 360px) {
   .hero h1 { font-size: clamp(2.6rem, 14vw, 3.8rem); }
-  .logo { width: 130px; }
+  .logo { width: 200px; }
   form { padding: 20px 14px; gap: 22px; }
   #result-box { padding: 18px 14px; }
   #areas button { padding: 9px 10px; font-size: 0.82rem; }
