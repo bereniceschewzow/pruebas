@@ -333,20 +333,7 @@ textarea:focus {
   box-shadow: 3px 3px 0 var(--dark);
 }
 
-/* ── Error ── */
-#error-msg {
-  background: var(--red);
-  border: 3px solid var(--dark);
-  padding: 16px 20px;
-  margin-top: 4px;
-}
 
-#error-text {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--cream);
-  letter-spacing: 0.04em;
-}
 
 /* ── Result box ── */
 #result-box {
@@ -410,27 +397,6 @@ textarea:focus {
   color: #D9CEBA;
 }
 
-/* ── Footer year strip ── */
-.year-strip {
-  display: flex;
-  overflow: hidden;
-  height: 48px;
-  background: var(--dark);
-  align-items: center;
-  margin-top: 0;
-}
-
-.year-strip span {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  color: var(--red);
-  padding: 0 20px;
-  white-space: nowrap;
-  opacity: 0.6;
-  letter-spacing: 0.12em;
-}
-
-.year-strip span:nth-child(odd) { color: var(--orange); opacity: 0.5; }
 
 /* ══════════════════════════════════════════
    RESPONSIVE — Mobile first
@@ -445,7 +411,7 @@ textarea:focus {
   .hero::before { width: 140px; height: 220px; opacity: 0.6; }
   .hero::after  { width: 80px;  height: 130px; right: 36px; }
 
-  .logo { width: 340px; }
+  .logo { width: 500px; }
 
   form {
     border-left: none;
@@ -473,7 +439,7 @@ textarea:focus {
   .hero::before { width: 90px;  height: 160px; opacity: 0.45; }
   .hero::after  { width: 55px;  height: 90px;  right: 20px; bottom: -6px; }
 
-  .logo { width: 260px; }
+  .logo { width: 300px; }
 
   .hero-sub {
     font-size: 0.62rem;
