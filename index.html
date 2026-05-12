@@ -3,62 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Shinwa</title>
-
-<link rel="stylesheet" href="estilo.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Qué harías más simple?</title>
 </head>
-
 <body>
 
-<header>
-    <h1>shinwa</h1>
+<h1>¿Qué harías más simple?</h1>
 
-    <nav>
-        <ul>
-            <li><a href="#">Dioses principales</a></li>
-            <li><a href="#">Criaturas míticas</a></li>
-            <li><a href="#">Mitos y relatos</a></li>
-            <li><a href="#">Mapa mitológico</a></li>
-            <li><a href="#">Quiz mitológico</a></li>
-        </ul>
-    </nav>
-</header>
+<form>
 
-<main>
+  <div>
+    <label for="simplicidad">¿Qué tan simple vivís? (1 = caos total, 10 = zen absoluto)</label>
+    <input type="range" id="simplicidad" min="1" max="10" value="5" step="1"
+      oninput="document.getElementById('simp-out').textContent = this.value">
+    <span id="simp-out">5</span>
+  </div>
 
-<section>
-    <h2>Explorá</h2>
-    <p>La mitología japonesa reúne relatos que explican el origen del mundo, la naturaleza y la vida humana.</p>
-</section>
+  <div>
+    <label>¿De qué área es?</label>
+    <div id="areas">
+      <button type="button" data-val="Trabajo / productividad"> Trabajo</button>
+      <button type="button" data-val="Tecnología"> Tecnología</button>
+      <button type="button" data-val="Hogar"> Hogar</button>
+      <button type="button" data-val="Educación"> Educación</button>
+      <button type="button" data-val="Salud / bienestar"> Salud</button>
+      <button type="button" data-val="Finanzas personales"> Finanzas</button>
+      <button type="button" data-val="Relaciones / social"> Social</button>
+      <button type="button" data-val="Otro"> Otro</button>
+    </div>
+  </div>
 
-<section>
-    <h2>Dioses</h2>
-    <p>Las deidades representan fuerzas naturales y aspectos de la vida dentro de la cultura japonesa.</p>
-</section>
+  <div>
+    <label for="cosa">¿Qué simplificarías?</label>
+    <textarea id="cosa" placeholder="Ej: armar el menú semanal, gestionar mis contraseñas..."></textarea>
+  </div>
 
-<section>
-    <h2>Criaturas</h2>
-    <p>Espíritus y seres sobrenaturales conectan lo humano con lo desconocido.</p>
-</section>
+  <div>
+    <label for="motivo">¿Por qué te parece complicado hoy?</label>
+    <textarea id="motivo" placeholder="Contame qué lo hace difícil o tedioso..."></textarea>
+  </div>
 
-<section>
-    <h2>Mitos</h2>
-    <p>Relatos simbólicos que explican fenómenos naturales y valores culturales.</p>
-</section>
+  <div>
+    <label for="urgencia">¿Qué tan urgente es resolverlo? (1 = puede esperar, 5 = ya mismo)</label>
+    <input type="range" id="urgencia" min="1" max="5" value="3" step="1"
+      oninput="document.getElementById('urg-out').textContent = this.value">
+    <span id="urg-out">3</span>
+  </div>
 
-<section>
-    <h2>Rituales</h2>
-    <p>Prácticas que reflejan la relación entre las personas y lo espiritual.</p>
-</section>
+  <button type="button" id="btn" onclick="enviar()">Pedirle ideas a Claude</button>
 
-</main>
+</form>
 
-<footer>
-    <p>Aviso legal - Política de cookies - Términos</p>
-</footer>
+<div id="error-msg" hidden>
+  <p id="error-text"></p>
+</div>
+
+<div id="result-box" hidden>
+  <h2>Respuesta de Claude</h2>
+  <div id="result-content"></div>
+</div>
+
+<script>
+  let areaSelected = '';
+
+  document.querySelectorAll('#areas button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#areas button').forEach(b => b.removeAttribute('aria-pressed'));
+      btn.setAttribute('aria-pressed', 'true');
+      areaSelected = btn.dataset.val;
+    });
+  });
+
+  async function enviar() {
+    const cosa     = document.getElementById('cosa').value.trim();
+    const motivo   = document.getElementById('motivo').value.trim();
+    const urgencia = document.getElementById('urgencia').value;
+    const simp     = document.getElementById('simplicidad').value;
+
+    document.getElementById('error-msg').hidden = true;
+
+    if (!cosa) {
+      document.getElementById('cosa').focus();
+      return;
+    }
+
+    const btn = document.getElementById('btn');
+    btn.disabled = true;
+    btn.textContent = 'Pensando...';
+    document.getElementById('result-box').hidden = true;
+
+    const prompt = `Sos un asistente experto en simplificar procesos y tareas cotidianas.
+
+Nivel de simplicidad actual del usuario (1=caos, 10=zen): ${simp}/10
+Área: ${areaSelected || 'General'}
+¿Qué quiere simplificar?: ${cosa}
+¿Por qué es complicado?: ${motivo || 'No especificado.'}
+Urgencia (1-5): ${urgencia}/5
+
+Dame exactamente 3 ideas prácticas y concretas para simplificar esto. Para cada idea usá este formato EXACTO:
+
+**IDEA 1: [título breve]**
+[2-3 oraciones concretas]
+
+**IDEA 2: [título breve]**
+[2-3 oraciones concretas]
+
+**IDEA 3: [título breve]**
+[2-3 oraciones concretas]
+
+Respondé en español, sé directo y evitá frases genéricas.`;
+
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const texto = data.content?.map(b => b.text || '').join('') || '';
+      if (!texto) throw new Error('Respuesta vacía');
+      renderRespuesta(texto);
+
+    } catch(e) {
+      document.getElementById('error-text').textContent = `Error: ${e.message}`;
+      document.getElementById('error-msg').hidden = false;
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Volver a preguntar';
+  }
+
+  function renderRespuesta(texto) {
+    const container = document.getElementById('result-content');
+    container.innerHTML = '';
+
+    const ideaRegex = /\*\*IDEA\s*(\d+):\s*(.+?)\*\*\s*([\s\S]*?)(?=\*\*IDEA|\s*$)/gi;
+    let match, encontradas = 0;
+
+    while ((match = ideaRegex.exec(texto)) !== null) {
+      const div = document.createElement('div');
+      div.innerHTML = `<strong>Idea ${match[1]}: ${match[2].trim()}</strong><p>${match[3].trim()}</p>`;
+      container.appendChild(div);
+      encontradas++;
+    }
+
+    if (encontradas === 0) {
+      container.innerHTML = texto.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    }
+
+    document.getElementById('result-box').hidden = false;
+  }
+</script>
 
 </body>
 </html>
