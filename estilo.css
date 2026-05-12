@@ -29,7 +29,6 @@ body {
   font-family: 'IBM Plex Mono', monospace;
   min-height: 100vh;
   overflow-x: hidden;
-  /* Subtle grain texture overlay */
   position: relative;
 }
 
@@ -57,7 +56,6 @@ h1 {
   letter-spacing: 0.02em;
   color: var(--red);
   text-transform: uppercase;
-  /* Diagonal slash of orange behind the title */
   position: relative;
   display: inline-block;
   padding: 28px 0 16px;
@@ -74,7 +72,6 @@ h1 {
 }
 
 .hero::before {
-  /* Large geometric block — Saul Bass silhouette feel */
   content: '';
   position: absolute;
   right: -20px;
@@ -103,6 +100,17 @@ h1 {
   mix-blend-mode: normal;
   position: relative;
   z-index: 1;
+}
+
+/* ── Logo image ── */
+.logo {
+  display: block;
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 8px;
 }
 
 .hero-sub {
@@ -437,6 +445,8 @@ textarea:focus {
   .hero::before { width: 140px; height: 220px; opacity: 0.6; }
   .hero::after  { width: 80px;  height: 130px; right: 36px; }
 
+  .logo { width: 220px; }
+
   form {
     border-left: none;
     border-right: none;
@@ -462,6 +472,8 @@ textarea:focus {
   .hero { padding: 24px 18px 22px; }
   .hero::before { width: 90px;  height: 160px; opacity: 0.45; }
   .hero::after  { width: 55px;  height: 90px;  right: 20px; bottom: -6px; }
+
+  .logo { width: 160px; }
 
   .hero-sub {
     font-size: 0.62rem;
@@ -491,7 +503,7 @@ textarea:focus {
   #areas button {
     font-size: 0.9rem;
     padding: 10px 14px;
-    min-height: 44px;   /* touch target mínimo */
+    min-height: 44px;
   }
 
   textarea {
@@ -533,6 +545,7 @@ textarea:focus {
 /* ── Mobile chico (≤ 360px) ── */
 @media (max-width: 360px) {
   .hero h1 { font-size: clamp(2.6rem, 14vw, 3.8rem); }
+  .logo { width: 130px; }
   form { padding: 20px 14px; gap: 22px; }
   #result-box { padding: 18px 14px; }
   #areas button { padding: 9px 10px; font-size: 0.82rem; }
