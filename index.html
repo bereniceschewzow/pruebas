@@ -67,16 +67,11 @@
       <button type="button" id="btn" onclick="enviar()">Enviar</button>
     </div>
 
-    <div id="error-msg" hidden>
-      <p id="error-text"></p>
-    </div>
-
   </form>
 
   <!-- ── Result ── -->
   <div id="result-box" hidden>
-    <h2>Respuesta de Claude</h2>
-    <div id="result-content"></div>
+    <h2>¡Respuesta enviada!</h2>
   </div>
 
 </div><!-- /.page-wrapper -->
@@ -92,91 +87,19 @@
     });
   });
 
-  async function enviar() {
-    const cosa     = document.getElementById('cosa').value.trim();
-    const motivo   = document.getElementById('motivo').value.trim();
-    const urgencia = document.getElementById('urgencia').value;
-    const simp     = document.getElementById('simplicidad').value;
-
-    document.getElementById('error-msg').hidden = true;
+  function enviar() {
+    const cosa = document.getElementById('cosa').value.trim();
 
     if (!cosa) {
       document.getElementById('cosa').focus();
       return;
     }
 
-    const btn = document.getElementById('btn');
-    btn.disabled = true;
-    btn.textContent = 'Pensando...';
-    document.getElementById('result-box').hidden = true;
-
-    const prompt = `Sos un asistente experto en simplificar procesos y tareas cotidianas.
-
-Nivel de simplicidad actual del usuario (1=caos, 10=zen): ${simp}/10
-Área: ${areaSelected || 'General'}
-¿Qué quiere simplificar?: ${cosa}
-¿Por qué es complicado?: ${motivo || 'No especificado.'}
-Urgencia (1-5): ${urgencia}/5
-
-Dame exactamente 3 ideas prácticas y concretas para simplificar esto. Para cada idea usá este formato EXACTO:
-
-**IDEA 1: [título breve]**
-[2-3 oraciones concretas]
-
-**IDEA 2: [título breve]**
-[2-3 oraciones concretas]
-
-**IDEA 3: [título breve]**
-[2-3 oraciones concretas]
-
-Respondé en español, sé directo y evitá frases genéricas.`;
-
-    try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          messages: [{ role: "user", content: prompt }]
-        })
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const texto = data.content?.map(b => b.text || '').join('') || '';
-      if (!texto) throw new Error('Respuesta vacía');
-      renderRespuesta(texto);
-
-    } catch(e) {
-      document.getElementById('error-text').textContent = `Error: ${e.message}`;
-      document.getElementById('error-msg').hidden = false;
-    }
-
-    btn.disabled = false;
-    btn.textContent = 'Volver a preguntar';
-  }
-
-  function renderRespuesta(texto) {
-    const container = document.getElementById('result-content');
-    container.innerHTML = '';
-
-    const ideaRegex = /\*\*IDEA\s*(\d+):\s*(.+?)\*\*\s*([\s\S]*?)(?=\*\*IDEA|\s*$)/gi;
-    let match, encontradas = 0;
-
-    while ((match = ideaRegex.exec(texto)) !== null) {
-      const div = document.createElement('div');
-      div.innerHTML = `<strong>Idea ${match[1]}: ${match[2].trim()}</strong><p>${match[3].trim()}</p>`;
-      container.appendChild(div);
-      encontradas++;
-    }
-
-    if (encontradas === 0) {
-      container.innerHTML = texto.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-    }
-
     document.getElementById('result-box').hidden = false;
     document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const btn = document.getElementById('btn');
+    btn.textContent = 'Volver a enviar';
   }
 </script>
 
