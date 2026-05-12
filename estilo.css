@@ -19,6 +19,10 @@
   --white:  #FDF8EE;
 }
 
+@media (min-width: 640px)  { :root { --ph: 32px; } }
+@media (min-width: 1024px) { :root { --ph: 60px; } }
+@media (min-width: 1280px) { :root { --ph: 80px; } }
+
 body {
   background-color: var(--cream);
   color: var(--dark);
